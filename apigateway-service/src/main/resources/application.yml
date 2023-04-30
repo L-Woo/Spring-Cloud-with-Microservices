@@ -20,10 +20,34 @@ spring:
             preLogger: true
             postLogger: true
       routes:
+#        - id: user-service
+#          uri: lb://USER-SERVICE
+#          predicates:
+#            - Path=/user-service/**
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/login
+            - Method=POST
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/users
+            - Method=POST
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
         - id: user-service
           uri: lb://USER-SERVICE
           predicates:
             - Path=/user-service/**
+            - Method=GET
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
         - id: catalog-service
           uri: lb://CATALOG-SERVICE
           predicates:
@@ -38,8 +62,8 @@ spring:
             - Path=/first-service/**
           filters:
             - CustomFilter
-#            - AddRequestHeader=first-request, first-request-header2
-#            - AddResponseHeader=first-request, first-response-header2
+            - AddRequestHeader=first-request, first-request-header2
+            - AddResponseHeader=first-request, first-response-header2
         - id: second-service
           uri: lb://MY-SECOND-SERVICE
           predicates:
@@ -51,5 +75,5 @@ spring:
                 baseMessage: Hi, there
                 preLogger: true
                 postLogger: true
-#            - AddRequestHeader=second-request, second-request-header2
-#            - AddResponseHeader=second-request, second-response-header2
+            - AddRequestHeader=second-request, second-request-header2
+            - AddResponseHeader=second-request, second-response-header2
