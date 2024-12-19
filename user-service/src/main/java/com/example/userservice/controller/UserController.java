@@ -1,11 +1,11 @@
-package com.example.user_service.controller;
+package com.example.userservice.controller;
 
-import com.example.user_service.dto.UserDto;
-import com.example.user_service.jpa.UserEntity;
-import com.example.user_service.service.UserService;
-import com.example.user_service.vo.Greeting;
-import com.example.user_service.vo.RequestUser;
-import com.example.user_service.vo.ResponseUser;
+import com.example.userservice.dto.UserDto;
+import com.example.userservice.jpa.UserEntity;
+import com.example.userservice.service.UserService;
+import com.example.userservice.vo.Greeting;
+import com.example.userservice.vo.RequestUser;
+import com.example.userservice.vo.ResponseUser;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user-service")
+@RequestMapping("/")
 public class UserController {
     private Environment env;
     private UserService userService;
@@ -77,6 +77,11 @@ public class UserController {
         ResponseUser returnValue = new ModelMapper().map(userDto, ResponseUser.class);
 
         return ResponseEntity.status(HttpStatus.OK).body(returnValue);
+    }
+
+    @PostMapping()
+    public void login() {
+
     }
 
 }
