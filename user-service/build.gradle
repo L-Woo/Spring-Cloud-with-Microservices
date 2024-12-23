@@ -24,7 +24,7 @@ repositories {
 }
 
 ext {
-	set('springCloudVersion', "2020.0.0")
+	set('springCloudVersion', "2020.0.1")
 }
 
 dependencies {
@@ -45,6 +45,13 @@ dependencies {
 	implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.3.8'
 	// Gradle을 사용하는 경우
 	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
+	// https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-bootstrap
+	implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-bootstrap', version: '3.1.5'
+	// https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-config
+	implementation 'org.springframework.cloud:spring-cloud-starter-config'
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-actuator
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
 
 }

@@ -1,5 +1,6 @@
 server:
   port: 0
+  address: 127.0.0.1
 
 spring:
   application:
@@ -29,6 +30,19 @@ eureka:
     service-url:
       defaultZone: http://127.0.0.1:8761/eureka
 
-
 greeting:
   message: Welcome to the Simple E-commerce.
+
+logging:
+  level:
+    com.example.userservice: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans
+
+#token:
+#  expiration_time: 86400000
+#  secret: user_token
